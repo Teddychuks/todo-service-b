@@ -2,18 +2,17 @@ import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { Client, ClientGrpc } from '@nestjs/microservices';
 import { Transport } from '@nestjs/microservices';
 import { join } from 'path';
-import { Observable, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { 
   Todo, 
-  TodoList, 
   CreateTodoDto,
   UpdateTodoDto, 
-  TodoById, 
   Empty, 
   TodoServiceClient,
   TODO_PACKAGE_NAME,
   TODO_SERVICE_NAME
 } from '../proto/todo';
+import * as grpc from '@grpc/grpc-js';
 
 @Injectable()
 export class RemoteTodoService implements OnModuleInit {
@@ -25,7 +24,8 @@ export class RemoteTodoService implements OnModuleInit {
     options: {
       package: TODO_PACKAGE_NAME,
       protoPath: join(__dirname, '../proto/todo.proto'),
-      url: process.env.REMOTE_SERVICE_URL || 'localhost:5001', // Todo Service A
+      url: process.env.REMOTE_SERVICE_URL || 'localhost:5001',
+      credentials: grpc.credentials.createSsl() // Todo Service A
     },
   })
   private client: ClientGrpc;
