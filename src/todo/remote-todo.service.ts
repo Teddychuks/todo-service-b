@@ -24,7 +24,7 @@ export class RemoteTodoService implements OnModuleInit {
     options: {
       package: TODO_PACKAGE_NAME,
       protoPath: join(__dirname, '../proto/todo.proto'),
-      url: process.env.REMOTE_SERVICE_URL || 'localhost:5001',
+      url: '13.61.173.179:5001',
       credentials: grpc.credentials.createSsl() // Todo Service A
     },
   })
