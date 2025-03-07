@@ -25,7 +25,7 @@ export class RemoteTodoService implements OnModuleInit {
       package: TODO_PACKAGE_NAME,
       protoPath: join(__dirname, '../proto/todo.proto'),
       url: '13.61.173.179:5001',
-      credentials: grpc.credentials.createSsl() // Todo Service A
+      credentials: grpc.credentials.createInsecure(), // Todo Service A
     },
   })
   private client: ClientGrpc;
