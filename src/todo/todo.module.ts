@@ -25,7 +25,7 @@ import { Todo } from '../entity/todo.entity';
           options: {
             package: 'todo',
             protoPath: join(__dirname, '../grpc/proto/todo.proto'),
-            url: configService.get('SERVICE_A_GRPC_URL', 'localhost:5000'),
+            url: configService.get('SERVICE_A_GRPC_URL', 'localhost:5001'),
           },
         }),
       },
