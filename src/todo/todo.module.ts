@@ -9,6 +9,7 @@ import { TodoController } from './todo.controller';
 import { TodoGrpcClient } from '../grpc/todo.client';
 import { TodoGrpcController } from '../grpc/todo.controller';
 import { Todo } from '../entity/todo.entity';
+import * as grpc from '@grpc/grpc-js';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { Todo } from '../entity/todo.entity';
             // url: configService.get('SERVICE_A_GRPC_URL', 'localhost:5001')
             // url: "172.31.33.214:5001"
             url: 'dns:///grpc-service-876551831298.us-central1.run.app:443',
+            credentials: grpc.credentials.createSsl(),
           },
         }),
       },
