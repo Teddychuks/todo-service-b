@@ -9,12 +9,12 @@ import { TodoController } from './todo.controller';
 import { TodoGrpcClient } from '../grpc/todo.client';
 import { TodoGrpcController } from '../grpc/todo.controller';
 import { Todo } from '../entity/todo.entity';
-// import * as grpc from '@grpc/grpc-js';
+import * as grpc from '@grpc/grpc-js';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Todo]),
-    
+
     // Registers gRPC client to connect to todo-service-a
     ClientsModule.registerAsync([
       {
@@ -26,10 +26,10 @@ import { Todo } from '../entity/todo.entity';
           options: {
             package: 'todo',
             protoPath: join(__dirname, '../grpc/proto/todo.proto'),
-            // url: configService.get('SERVICE_A_GRPC_URL', 'localhost:5001'),
-            url: "172.31.33.214:5001",
-            // url: 'dns:///grpc-service-876551831298.us-central1.run.app:443',
-            // credentials: grpc.credentials.createSsl(),
+            // url: configService.get('SERVICE_A_GRPC_URL'),
+            // url: '172.31.33.214:5001',
+            url: 'dns:///grpc-service-876551831298.us-central1.run.app:443',
+            credentials: grpc.credentials.createSsl(),
           },
         }),
       },
