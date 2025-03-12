@@ -10,6 +10,7 @@ import { TodoGrpcClient } from '../grpc/todo.client';
 import { TodoGrpcController } from '../grpc/todo.controller';
 import { Todo } from '../entity/todo.entity';
 import * as grpc from '@grpc/grpc-js';
+import { ReflectionService } from '@grpc/reflection';
 
 @Module({
   imports: [
@@ -30,6 +31,10 @@ import * as grpc from '@grpc/grpc-js';
             // url: '172.31.33.214:5001',
             url: 'dns:///grpc-service-876551831298.us-central1.run.app:443',
             credentials: grpc.credentials.createSsl(),
+
+            onLoadPackageDefinition: (pkg, server) => {
+              new ReflectionService(pkg).addToServer(server);
+            },
           },
         }),
       },
